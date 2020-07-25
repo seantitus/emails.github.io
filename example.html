@@ -5,37 +5,43 @@
             Subject: <br><textarea rows=3 cols=60 id="subject">INSERT SUBJECT</textarea><br>
             Bcc: <br><textarea rows=2 cols=60 id="bcc">defundsfpdnow+emailcampaign@gmail.com</textarea><br>
             Body: <br><textarea rows=15 cols=60 id="emailbody">We should probably stop paying cops so much, like 100% less.</textarea><br>
-        <button onclick="encode()">Generate Links</button><br>
-        <div id=mailToLink>Mail To</div><textarea rows=10 cols=60 id="mailto"></textarea><br>
-        <div id=gmailLink>Gmail</div><textarea rows=10 cols=60 id="gmail"></textarea><br>
-        <div id=yahooLink>Yahoo</div><textarea rows=10 cols=60 id="yahoo"></textarea><br>
-        <div id="gmailLink"></div>
-        <div id="yahooLink"></div>
-        <script>
-            function createMailTo(toArray, subject, body, bcc) {
-                return `<a target="_blank" href="mailto:${toArray.join(" ")}?${encodeURIComponent(bcc)}&subject=${encodeURIComponent(subject)}`
-                + `&${encodeURIComponent(body).replace(/\%0A/g, "<br>")}">Mail To</a>`
-            }
-            function createGmail(toArray, subject, body, bcc) {
-                return `<a target="_blank" href="https://mail.google.com/mail/?view=cm&to=${toArray.join(" ")}?bcc=${encodeURIComponent(bcc)}`
-                + `&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}">Gmail</a>`
-            }
-            function createYahoo(toArray, subject, body, bcc) {
-                return `<a target="_blank" href="http://compose.mail.yahoo.com/?to=${toArray.join(",")}?bcc=${encodeURIComponent(bcc)}`
-                + `&subj=${encodeURIComponent(subject)}&body=${encodeURIComponent(body).replace(/\%0A/g, "%0D%0A")}">Yahoo</a>`
-            }
-            function encode() {
-                toArray = to.value.replace(/\s+/g, '').split(",")
-                mailTo = createMailTo(toArray, subject.value, emailbody.value, bcc.value)
-                gmail = createGmail(toArray, subject.value, emailbody.value, bcc.value)
-                yahoo = createYahoo(toArray, subject.value, emailbody.value, bcc.value)
-                document.getElementById("mailto").value = mailTo
-                document.getElementById("gmail").value = gmail
-                document.getElementById("yahoo").value = yahoo
-                document.getElementById("mailToLink").innerHTML = mailTo
-                document.getElementById("gmailLink").innerHTML = gmail
-                document.getElementById("yahooLink").innerHTML = yahoo
-            }
-        </script>
+            <button onclick="encode()">Generate Links</button><br>
+            <div id=mailToLink>Mail To</div><textarea rows=10 cols=60 id="mailto"></textarea><br>
+            <div id=gmailLink>Gmail</div><textarea rows=10 cols=60 id="gmail"></textarea><br>
+            <div id=yahooLink>Yahoo</div><textarea rows=10 cols=60 id="yahoo"></textarea><br>
+            <div id=outlookLink>Outlook</div><textarea rows=10 cols=60 id="outlook"></textarea><br>
+            <script>
+                function createMailTo(toArray, subject, body, bcc) {
+                    return `<a target="_blank" href="mailto:${toArray.join(" ")}?${encodeURIComponent(bcc)}&subject=${encodeURIComponent(subject)}`
+                    + `&${encodeURIComponent(body).replace(/\%0A/g, "<br>")}">Mail To</a>`
+                }
+                function createGmail(toArray, subject, body, bcc) {
+                    return `<a target="_blank" href="https://mail.google.com/mail/?view=cm&to=${toArray.join(" ")}?bcc=${encodeURIComponent(bcc)}`
+                    + `&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}">Gmail</a>`
+                }
+                function createYahoo(toArray, subject, body, bcc) {
+                    return `<a target="_blank" href="http://compose.mail.yahoo.com/?to=${toArray.join(",")}?bcc=${encodeURIComponent(bcc)}`
+                    + `&subj=${encodeURIComponent(subject)}&body=${encodeURIComponent(body).replace(/\%0A/g, "%0D%0A")}">Yahoo</a>`
+                }
+                function createOutlook(toArray, subject, body, bcc) {
+                    return `<a target="_blank" href="https://outlook.live.com/default.aspx?rru=compose&to${toArray.join(" ")}?bcc=${encodeURIComponent(bcc)}`
+                    + `&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}">Outlook</a>`
+                }
+                function encode() {
+                    toArray = to.value.replace(/\s+/g, '').split(",")
+                    mailTo = createMailTo(toArray, subject.value, emailbody.value, bcc.value)
+                    gmail = createGmail(toArray, subject.value, emailbody.value, bcc.value)
+                    yahoo = createYahoo(toArray, subject.value, emailbody.value, bcc.value)
+                    outlook = createOutlook(toArray, subject.value, emailbody.value, bcc.value)
+                    document.getElementById("mailto").value = mailTo
+                    document.getElementById("gmail").value = gmail
+                    document.getElementById("yahoo").value = yahoo
+                    document.getElementById("outlook").value = outlook
+                    document.getElementById("mailToLink").innerHTML = mailTo
+                    document.getElementById("gmailLink").innerHTML = gmail
+                    document.getElementById("yahooLink").innerHTML = yahoo
+                    document.getElementById("outlookLink").innerHTML = outlook
+                }
+            </script>
     </body>
 </html>
