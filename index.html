@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <body>
+            To (separate with commas): <br><textarea rows=3 cols=60 id="to">MayorLondonBreed@sfgov.org,Board.of.Supervisors@sfgov.org,sandra.fewer@sfgov.org,Catherine.Stefani@sfgov.org,Aaron.Peskin@sfgov.org,marstaff@sfgov.org,prestonstaff@sfgov.org,Norman.Yee@sfgov.org,mandelmanstaff@sfgov.org,ronenstaff@sfgov.org,waltonstaff@sfgov.org,Ahsha.Safai@sfgov.org,Carmen.Chu@sfgov.org</textarea><br>
+            Subject: <br><textarea rows=3 cols=60 id="subject">INSERT SUBJECT</textarea><br>
+            Bcc: <br><textarea rows=2 cols=60 id="bcc">defundsfpdnow+emailcampaign@gmail.com</textarea><br>
+            Body: <br><textarea rows=15 cols=60 id="emailbody">We should probably stop paying cops so much, like 100% less.</textarea><br>
+        <button onclick="encode()">Generate Links</button><br>
+        Mailto:<br><textarea rows=10 cols=60 id="mailto"></textarea><br>
+        Gmail:<br><textarea rows=10 cols=60 id="gmail"></textarea><br>
+        <script>
+            function createMailTo(toArray, subject, body, bcc) {
+                return `<a target="_blank" href="mailto:${toArray.join(" ")}?${encodeURIComponent(bcc)}&subject=${encodeURIComponent(subject)}`
+                + `&${encodeURIComponent(body).replace(/\%0A/g, "<br>")}">Email</a>`
+            }
+            function createGmail(toArray, subject, body, bcc) {
+                return `<a target="_blank" href="https://mail.google.com/mail/?view=cm&to=${toArray.join(" ")}?bcc=${encodeURIComponent}`
+                + `&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}">Gmail</a>`
+            }
+            function encode() {
+                toArray = to.value.replace(/\s+/g, '').split(",")
+                document.getElementById("mailto").value = createMailTo(toArray, subject.value, emailbody.value, bcc.value)
+                document.getElementById("gmail").value = createGmail(toArray, subject.value, emailbody.value, bcc.value)
+            }
+        </script>
+    </body>
+</html>
